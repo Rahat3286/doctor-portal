@@ -72,7 +72,7 @@ const AppointmentForm = ({ modalIsOpen, closeModal, appointmentOn, date }) => {
                     <div className="form-group mb-3 row">
                         <div className="col-4">
 
-                            <select className="form-control" name="gender" {...register("exampleRequired", { required: true })} >
+                            <select className="form-control" name="gender" {...register("gender", { required: true })} >
                                 <option disabled={true} value="Not set">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -82,11 +82,11 @@ const AppointmentForm = ({ modalIsOpen, closeModal, appointmentOn, date }) => {
 
                         </div>
                         <div className="col-4">
-                            <input {...register("exampleRequired", { required: true })} className="form-control" name="age" placeholder="Your Age" type="number" />
+                            <input {...register("age", { required: true })} className="form-control" name="age" placeholder="Your Age" type="number" />
                             {errors.age && <span className="text-danger">This field is required</span>}
                         </div>
                         <div className="col-4">
-                            <input {...register("exampleRequired", { required: true })} className="form-control" name="weight" placeholder="Weight" type="number" />
+                            <input {...register("weight", { required: true })} className="form-control" name="weight" placeholder="Weight" type="number" />
                             {errors.weight && <span className="text-danger">This field is required</span>}
                         </div>
                     </div>
