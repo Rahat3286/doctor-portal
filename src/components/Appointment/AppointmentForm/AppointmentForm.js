@@ -18,31 +18,30 @@ Modal.setAppElement('#root')
 const AppointmentForm = ({ modalIsOpen, closeModal, appointmentOn, date }) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-    }
-
-    // const onSubmit = data => {
-    //     data.service = appointmentOn;
-    //     data.date = date;
-    //     data.created = new Date();
-
-    //     fetch('http://localhost:5000/addAppointment', {
-    //         method: 'POST',
-    //         headers: { 'content-type': 'application/json' },
-    //         body: JSON.stringify(data)
-    //     })
-    //     .then(res => res.json())
-    //     .then(success => {
-    //         if(success){
-    //             closeModal();
-    //             // alert('Appointment created successfully.');
-    //         }
-    //     })
-
-
-
+    // const onSubmit = (data) => {
+    //     console.log(data);
+    //     closeModal()
     // }
+
+
+    const onSubmit = data => {
+        data.service = appointmentOn;
+        data.date = date;
+        data.created = new Date();
+
+        fetch('http://localhost:5000/addAppointment', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(success => {
+            if(success){
+                closeModal();
+                alert('Appointment created successfully.');
+            }
+        })
+    }
 
     return (
         <div>
@@ -73,13 +72,12 @@ const AppointmentForm = ({ modalIsOpen, closeModal, appointmentOn, date }) => {
                         <div className="col-4">
 
                             <select className="form-control" name="gender" {...register("gender", { required: true })} >
+                                {errors.gender && <span className="text-danger">This field is required</span>}
                                 <option disabled={true} value="Not set">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Not set">Other</option>
                             </select>
-                            {errors.gender && <span className="text-danger">This field is required</span>}
-
                         </div>
                         <div className="col-4">
                             <input {...register("age", { required: true })} className="form-control" name="age" placeholder="Your Age" type="number" />
